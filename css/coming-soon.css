@@ -170,11 +170,16 @@ h6 {
 }
 
 .social-icons ul > li {
-  margin-left: 1rem;
-  margin-right: 1rem;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
   display: inline-block;
 }
-
+.social-icons ul > li:first-child {
+  margin-left: 0;
+}
+.social-icons ul > li:last-child {
+  margin-right: 0;
+}
 .social-icons ul > li > a {
   display: block;
   color: black;
