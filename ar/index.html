@@ -1,0 +1,168 @@
+<!doctype>
+<html>
+<head>
+
+  <meta charset="utf-8">
+  <title>Appleseed storytelling</title>
+
+
+  <!-- Vendor CSS: Bootstrap, Font Awesome -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+
+
+  <!-- My CSS -->
+  <link rel="stylesheet" type="text/css" href="css/default.css">
+  <link rel="stylesheet" type="text/css" href="css/preloader.css">
+
+  <!-- A-Frame & AR.js include -->
+  <script src="js/082/aframe.min.js"></script>
+  <script src="js/aframe-ar-dev.js"></script>
+
+  <!-- k-frame extensions -->
+  <script src="https://unpkg.com/aframe-animation-component@^5.1.2/dist/aframe-animation-component.min.js"></script>
+  <script src="https://unpkg.com/aframe-gltf-part-component/dist/aframe-gltf-part-component.min.js"></script>
+
+
+  <!-- a-frame-effects -->
+  <script src="js/aframe-effects/aframe-effects.js"></script>
+
+
+  <!-- area lights -->
+  <script src="https://unpkg.com/aframe-area-light-component/dist/aframe-area-light-component.min.js"></script>
+
+
+  <!-- Custom Component Scripts -->
+  <script src="js/custom-components.js"></script>
+
+  <!-- Typed.js library -->
+
+
+
+</head>
+
+
+
+
+
+<body class="">
+
+  <div id="loader-wrapper">
+    <!-- <img src="img/logo.png" alt="Ljubičice logo"> -->
+    <div id="loader">
+
+    </div>
+    <img class="logoLoader" src="img/logo_sm.png" alt="" />
+
+    <div class="typed-wrapper">
+      <span class="typeIntro"></span>
+
+
+      <button id="gumb" type="button" class="btn btn-lg btn-light" disabled>
+        <i class="fas fa-cog fa-spin"></i> <span>Učitavanje...</span>
+      </button>
+
+    </div>
+
+    <div class="loader-section section-left"></div>
+    <div class="loader-section section-right"></div>
+
+  </div>
+
+
+  <div id="markerFinder" class="">
+    <div class="explain">
+      Trazim marker
+    </div>
+  </div>
+	<a-scene embedded arjs='sourceType: webcam; debugUIEnabled: false; trackingMethod: best; detectionMode: color;' vr-mode-ui="enabled: false;"
+            effects="glitch" glitch="false" stats="false"
+            renderer="gammaOutput: true" light="defaultLightsEnabled: true">
+
+    <a-assets>
+      <a-asset-item id="tree" src="../3d/ds_full_wo_anim6.gltf"></a-asset-item>
+      <a-asset-item id="lj" src="../3d/logo2.gltf"></a-asset-item>
+    </a-assets>
+
+      <!-- Hiro Marker; sve sto treba da se pojavi od 3d elemenata ide ovde -->
+      <a-marker preset='custom' type='pattern' url='patterns/bw_dev.patt'>
+        <a-entity id="fadinglogo"
+        >
+          <a-entity gltf-part="src: #tree; part: screen">
+            <a-entity rotation="-90 0 0"  text="align: center; width:3; value: ČĆŽŠĐ \n čćžšđ; font: fonts/ConduitITC-Light_ZP.fnt; color: white"
+                      position="0 -0.1 0"
+
+            >
+            </a-entity>
+          </a-entity>
+
+          <a-entity gltf-part="src: #tree; part: up"
+          >
+          </a-entity>
+
+          <a-entity gltf-part="src: #tree; part: down"
+          >
+          </a-entity>
+
+          <a-entity gltf-model="#lj"
+                    animation__rotation="property: rotation; dur: 2000; loop: true; to: 0 0 360; easing: easeInOutCubic"
+                    position="0 0.3 -1.2"
+          >
+
+          </a-entity>
+        </a-entity>
+        <!-- <a-entity id="fadinglogo" gltf-part="src: #tree; part: lj"
+        >
+        </a-entity> -->
+
+
+
+
+
+
+
+
+
+
+        <!-- PLANE SA TEXTOM I ANIMACIJOM KOJA RADI!  -->
+
+        <!-- Test plane w/ txt -->
+        <!-- <a-entity id="fadingcube" geometry="primitive: plane" height="1.3" width="1.3" rotation="-90 0 0" position='0 0.2 0' material="color: orange; opacity: 0;"
+             animation__fadein="property: components.material.material.opacity; dur: 500; easing: linear; from: 0; to: 0.8; startEvents: fadeIn"
+             animation__fadeout="property: components.material.material.opacity; dur: 500; easing: linear; from: 0.8; to: 0; startEvents: fadeOut"
+
+             >
+               <a-entity  text="align: center; width:6; value: ČĆŽŠĐ \n čćžšđ; font: fonts/ConduitITC-Light_ZP.fnt; color: #CCC" position="0 0 0.1"></a-entity>
+        </a-entity> -->
+
+        <!-- LOGO KOJI RADI! -->
+
+        <!-- Logo Lj sa animacijama: opacity i rotation -->
+        <!-- <a-entity id="fadinglogo" gltf-model="#tree" scale="0.05 0.05 0.05" position="0 0 0" model-opacity="0"
+                  animation__fadein="property: model-opacity; dur: 500; easing: linear; from: 0; to: 0.8; startEvents: fadeIn"
+                  animation__fadeout="property: model-opacity; dur: 500; easing: linear; from: 0.8; to: 0; startEvents: fadeOut"
+                  animation__rotation="property: rotation; dur: 2000; loop: true; to: 0 0 360; easing: easeInOutCubic"
+        >
+
+        </a-entity> -->
+
+    </a-marker>
+
+		<!-- <a-camera-static/> -->
+    <a-entity camera></a-entity>
+
+	</a-scene>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.9"></script>
+  <script src="js/typedstuff.js"></script>
+
+  <script type="text/javascript" src="js/markerscript.js"></script>
+
+
+
+</body>
+</html>
